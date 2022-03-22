@@ -12,14 +12,13 @@ class DataBaseServices {
   );
   static Stream<List<MoviePopularModel>> loadMoviePopular() {
     return _tmdb.v3.movies.getPopular().asStream().map(
-      (Map<dynamic, dynamic> map) {
-        List<MoviePopularModel> retVal = [];
-        for (var item in map[MoviePopularModel.RESULTS]) {
-          retVal.add(
-            MoviePopularModel.fromJson(item),
-          );
+      (map) {
+        List reslt = map[MoviePopularModel.RESULTS];
+        List<MoviePopularModel> movieLsit = [];
+        for (var item in reslt) {
+          movieLsit.add(MoviePopularModel.fromJson(item));
         }
-        return retVal;
+        return movieLsit;
       },
     );
   }
