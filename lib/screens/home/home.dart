@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:movies_demo_app/core/core_export.dart';
+import 'package:movies_demo_app/screens/screens.export.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 
 import '../../models/models_export.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return NetworkSensitive(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Movies"),
+          title: const CustomText(
+            text: "Movies",
+            size: 18,
+          ),
         ),
         body: SafeArea(
           child: StreamBuilder(
@@ -26,7 +25,7 @@ class _HomeState extends State<Home> {
             builder: (_, AsyncSnapshot<List<MoviePopularModel>> snap) {
               if (!snap.hasData) {
                 return const Center(
-                  child: Text('don\'t have data ..'),
+                  child: CustomText(text: 'loadig data ..'),
                 );
               } else if (snap.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -38,10 +37,21 @@ class _HomeState extends State<Home> {
                 return StaggeredGridView.countBuilder(
                   itemCount: movieLsit.length,
                   crossAxisCount: 3,
-                  itemBuilder: (context, index) => CustomCachedNetworkImage(
-                    context: context,
-                    url:
-                        "${Utilities.IMAGE_HOST}${movieLsit[index].posterPath}",
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => MoviedetailsScreen(
+                          id: movieLsit[index].id!,
+                        ),
+                      ),
+                    ),
+                    child: CustomCachedNetworkImage(
+                      context: context,
+                      url: Utilities.getIamgeUrl(
+                        movieLsit[index].posterPath.toString(),
+                      ),
+                      boxFit: BoxFit.fill,
+                    ),
                   ),
                   staggeredTileBuilder: (index) => StaggeredTile.count(
                     (index % 7 == 0) ? 2 : 1,

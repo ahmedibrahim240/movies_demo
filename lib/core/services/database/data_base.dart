@@ -1,5 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:movies_demo_app/core/utilities/utilities.dart';
-import 'package:movies_demo_app/models/movie_popular_model.dart';
+import 'package:movies_demo_app/models/models_export.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 class DataBaseServices {
@@ -11,7 +12,7 @@ class DataBaseServices {
     ),
   );
   static Stream<List<MoviePopularModel>> loadMoviePopular() {
-    return _tmdb.v3.movies.getPopular().asStream().map(
+    return _tmdb.v3.movies.getPopular(page: 10).asStream().map(
       (map) {
         List reslt = map[MoviePopularModel.RESULTS];
         List<MoviePopularModel> movieLsit = [];
@@ -19,6 +20,15 @@ class DataBaseServices {
           movieLsit.add(MoviePopularModel.fromJson(item));
         }
         return movieLsit;
+      },
+    );
+  }
+
+  static Stream<Map<dynamic, dynamic>> loadMoviedetails(int id) {
+    debugPrint("ID=>>>>>$id");
+    return _tmdb.v3.movies.getDetails(id).asStream().map(
+      (Map<dynamic, dynamic> map) {
+        return map;
       },
     );
   }

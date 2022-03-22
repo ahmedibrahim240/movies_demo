@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Movies Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData(
+        brightness: Brightness.dark,
         appBarTheme: const AppBarTheme(
           elevation: 0,
           centerTitle: false,

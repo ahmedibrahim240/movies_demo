@@ -12,4 +12,7 @@ class Utilities {
   static double defaultSize = SizeConfig.defaultSize!;
   static double screenWidth = SizeConfig.screenWidth!;
   static double screenHeight = SizeConfig.screenHeight!;
+  static String getIamgeUrl(String path) {
+    return IMAGE_HOST + path;
+  }
 }
