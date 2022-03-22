@@ -10,18 +10,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
-  void initState() {
-    super.initState();
-    DataBaseServices.loadMoviePopular();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return NetworkSensitive(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("home"),
+          title: const Text("Movies"),
         ),
+        body: Container(),
       ),
     );
   }
