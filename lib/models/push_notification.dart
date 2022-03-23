@@ -1,9 +1,9 @@
-class PushNotificationModel {
+class PushNotificationInfo {
   String? title;
   String? body;
   String? dataTitle;
   String? dataBody;
-  PushNotificationModel({
+  PushNotificationInfo({
     this.title,
     this.body,
     this.dataTitle,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:movies_demo_app/core/core_export.dart';
 import 'package:movies_demo_app/screens/screens.export.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
@@ -6,8 +7,19 @@ import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
 import '../../models/models_export.dart';
 import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    NotificationServices.notificatonsHandel(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
