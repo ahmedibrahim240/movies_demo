@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:movies_demo_app/core/utilities/utilities.dart';
 import 'package:movies_demo_app/models/models_export.dart';
 import 'package:tmdb_api/tmdb_api.dart';
@@ -24,9 +23,8 @@ class DataBaseServices {
     );
   }
 
-  static Stream<Map<dynamic, dynamic>> loadMoviedetails(int id) {
-    debugPrint("ID=>>>>>$id");
-    return _tmdb.v3.movies.getDetails(id).asStream().map(
+  static Stream<Map<dynamic, dynamic>> loadMoviedetails(String id) {
+    return _tmdb.v3.movies.getDetails(int.parse(id)).asStream().map(
       (Map<dynamic, dynamic> map) {
         return map;
       },

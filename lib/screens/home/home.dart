@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:movies_demo_app/core/core_export.dart';
 import 'package:movies_demo_app/screens/screens.export.dart';
@@ -23,6 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return NetworkSensitive(
       child: Scaffold(
         appBar: AppBar(
@@ -30,6 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
             text: "Movies",
             size: 18,
           ),
+          actions: [
+            IconButton(
+              onPressed: () => NotificationServices.sentNotifications(),
+              icon: const Icon(Icons.notification_add_sharp),
+            ),
+          ],
         ),
         body: SafeArea(
           child: StreamBuilder(
@@ -50,13 +59,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: movieLsit.length,
                   crossAxisCount: 3,
                   itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => MoviedetailsScreen(
-                          id: movieLsit[index].id!,
-                        ),
-                      ),
-                    ),
+                    onTap: () {
+                      debugPrint('/movie/${movieLsit[index].id}');
+                      Get.to(() => MoviedetailsScreen(
+                          id: movieLsit[index].id!.toString()));
+                    },
                     child: CustomCachedNetworkImage(
                       context: context,
                       url: Utilities.getIamgeUrl(

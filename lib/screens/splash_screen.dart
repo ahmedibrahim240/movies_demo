@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_demo_app/screens/home/home.dart';
+import 'package:get/get.dart';
 
-import '../core/core_export.dart';
+import 'package:movies_demo_app/screens/home/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,10 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(
       const Duration(seconds: 3),
       () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (_) => const HomeScreen(),
-          ),
+        Get.offAll(
+          () => const HomeScreen(),
         );
       },
     );
@@ -29,8 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

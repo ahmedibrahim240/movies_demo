@@ -1,7 +1,5 @@
 // ignore_for_file: constant_identifier_names
 
-import 'package:flutter/material.dart';
-
 class MoviedetailsModel {
   static const ID = 'id';
   static const TITLE = 'title';
@@ -39,16 +37,32 @@ class MoviedetailsModel {
     popularity = jsonMap[POPULARITY];
     backdropPath = jsonMap[BACKDROP_PATH];
     posterPath = jsonMap[POSTERR_PATH];
-    genres = _setGenresLsit(jsonMap[GENRES]) ?? [];
+    genres = _setGenresLsit(jsonMap[GENRES]);
   }
-  List<MovieGenres>? _setGenresLsit(List reslt) {
-    debugPrint("reslt:$reslt");
-
+  List<MovieGenres> _setGenresLsit(List? reslt) {
     List<MovieGenres> movieLsit = [];
-    for (var item in reslt) {
-      movieLsit.add(MovieGenres.fromJson(item));
+    if (reslt == null) {
+      return [];
+    } else {
+      for (var item in reslt) {
+        movieLsit.add(MovieGenres.fromJson(item));
+      }
+      return movieLsit;
     }
-    return movieLsit;
+  }
+
+  toJson() {
+    return {
+      ID: id,
+      TITLE: title,
+      RELEASEDATE: releaseDate,
+      OVERVIEW: overview,
+      POSTERR_PATH: posterPath,
+      BACKDROP_PATH: backdropPath,
+      POPULARITY: popularity,
+      VOTE_AVERAGE: voteAverage,
+      VOTE_COUNT: voteCount,
+    };
   }
 }
 

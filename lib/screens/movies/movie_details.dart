@@ -4,7 +4,7 @@ import '../../models/models_export.dart';
 import 'functions.dart';
 
 class MoviedetailsScreen extends StatelessWidget {
-  final int id;
+  final String id;
   const MoviedetailsScreen({Key? key, required this.id}) : super(key: key);
 
   @override
@@ -23,18 +23,26 @@ class MoviedetailsScreen extends StatelessWidget {
                 child: CircularProgressIndicator.adaptive(),
               );
             } else {
-              MoviedetailsModel movieDitail =
-                  MoviedetailsModel.fromJson(snap.data!);
+              Map? data = snap.data;
+              if (data == null) {
+                return const Center(
+                  child: CustomText(text: 'Movie not found'),
+                );
+              } else {
+                MoviedetailsModel movieDitail =
+                    MoviedetailsModel.fromJson(data);
+                debugPrint('Movie:${movieDitail.toJson()}');
 
-              return ListView(
-                shrinkWrap: true,
-                primary: true,
-                children: [
-                  buildBackdIamge(context, movieDitail),
-                  buidScreenHederdetails(movieDitail),
-                  buildPosterOverView(context, movieDitail),
-                ],
-              );
+                return ListView(
+                  shrinkWrap: true,
+                  primary: true,
+                  children: [
+                    buildBackdIamge(context, movieDitail),
+                    buidScreenHederdetails(movieDitail),
+                    buildPosterOverView(context, movieDitail),
+                  ],
+                );
+              }
             }
           },
         ),

@@ -25,6 +25,7 @@ class NotificationServices {
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
     if (!kIsWeb) {
       channel = const AndroidNotificationChannel(
         'high_importance_channel', // id
@@ -58,6 +59,24 @@ class NotificationServices {
         sound: true,
       );
     }
+  }
+
+  static sentNotifications() {
+    flutterLocalNotificationsPlugin.show(
+      0,
+      'Test Noitfication',
+      "wlecome in movie app",
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          channel.id,
+          channel.name,
+          channelDescription: channel.description,
+          color: Colors.transparent,
+          playSound: true,
+          icon: '@mipmap/ic_launcher',
+        ),
+      ),
+    );
   }
 
   static notificatonsHandel(BuildContext context) {
