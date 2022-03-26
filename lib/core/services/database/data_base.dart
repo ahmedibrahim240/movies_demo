@@ -10,8 +10,8 @@ class DataBaseServices {
       showLogs: true,
     ),
   );
-  static Stream<List<MoviePopularModel>> loadMoviePopular() {
-    return _tmdb.v3.movies.getPopular(page: 10).asStream().map(
+  static Stream<List<MoviePopularModel>> loadMoviePopular(int page) {
+    return _tmdb.v3.movies.getPopular(page: page).asStream().map(
       (map) {
         List reslt = map[MoviePopularModel.RESULTS];
         List<MoviePopularModel> movieLsit = [];
