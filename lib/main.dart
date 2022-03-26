@@ -8,7 +8,10 @@ import 'core/core_export.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then(
-    (value) => Get.put<DeepLinkController>(DeepLinkController()),
+    (value) {
+      Get.put<DeepLinkController>(DeepLinkController());
+      Get.put<HomePageController>(HomePageController());
+    },
   );
   await NotificationServices.setNotificationSetting();
   ConnectivityStatus initialData = await ConnectivityService().getIntState();
