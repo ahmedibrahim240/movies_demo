@@ -45,8 +45,21 @@ buldMovieList() {
         stream: DataBaseServices.loadMoviePopular(homePageController.getPage),
         builder: (_, AsyncSnapshot<List<MoviePopularModel>> snap) {
           if (!snap.hasData) {
-            return const Center(
-              child: CustomText(text: 'loadig data ..'),
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const CustomText(text: 'page not found ..'),
+                  TextButton(
+                    onPressed: () => homePageController.page.value = 1,
+                    child: const CustomText(
+                      text: 'back to home ',
+                      color: Colors.red,
+                    ),
+                  )
+                ],
+              ),
             );
           } else if (snap.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -105,9 +118,7 @@ Widget pageButtom({
                   color: Colors.red,
                 ),
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              const SizedBox(width: 5),
               CustomText(
                 text: label,
                 color: Colors.red,
@@ -118,9 +129,7 @@ Widget pageButtom({
                 text: label,
                 color: Colors.red,
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              const SizedBox(width: 5),
               const Icon(
                 Icons.forward,
                 size: 20,
