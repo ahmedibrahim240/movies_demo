@@ -21,8 +21,8 @@ import Firebase
      UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
    }
      let controller = window.rootViewController as! FlutterViewController
-    methodChannel = FlutterMethodChannel(name: "deeplink.movie.app", binaryMessenger: controller.binaryMessenger)
-    eventChannel = FlutterEventChannel(name: "deeplink.movie.app", binaryMessenger: controller.binaryMessenger)
+    methodChannel = FlutterMethodChannel(name: "https.deeplink.movie.app/channel", binaryMessenger: controller.binaryMessenger)
+    eventChannel = FlutterEventChannel(name: "https.deeplink.movie.app/events", binaryMessenger: controller.binaryMessenger)
 
     
     methodChannel?.setMethodCallHandler({ (call: FlutterMethodCall, result: FlutterResult) in
